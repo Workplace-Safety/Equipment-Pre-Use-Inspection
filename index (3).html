@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Equipment Pre-Use Inspection Log</title>
+
+<!-- PDF export library (only needed for the Download PDF button) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.14.0/html2pdf.bundle.min.js"></script>
+<!-- Real .docx (Word) export library (only needed for the Download Word button) -->
+<script src="https://cdn.jsdelivr.net/npm/html-docx-js@0.3.1/dist/html-docx.min.js"></script>
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- STICKY TOOLBAR (stays visible while scrolling) -->
+<div class="toolbar">
+    <span class="toolbar-title">Equipment Pre-Use Inspection Log</span>
+    <button class="btn btn-pdf" id="downloadPdfBtn" type="button">⬇ Download PDF</button>
+    <button class="btn btn-word" id="downloadWordBtn" type="button">⬇ Download Word</button>
+    <button class="btn btn-reset" type="reset" form="printable">↺ Reset Form</button>
+</div>
+
+<!-- PRINTABLE / EXPORTABLE FORM -->
+<form id="printable">
+
+    <!-- HEADER -->
+    <div class="header">
+        <h1>Equipment Pre-Use Inspection Log</h1>
+        <div class="header-info">
+            <div class="info-field">
+                <span class="info-label">Equipment Type:</span>
+                <input type="text" class="info-input" placeholder="e.g., Excavator, Forklift, Skid Steer" />
+            </div>
+            <div class="info-field">
+                <span class="info-label">Make/Model:</span>
+                <input type="text" class="info-input" />
+            </div>
+            <div class="info-field">
+                <span class="info-label">Equipment ID/Unit #:</span>
+                <input type="text" class="info-input" />
+            </div>
+            <div class="info-field">
+                <span class="info-label">Inspection Date:</span>
+                <input type="date" class="info-input" />
+            </div>
+            <div class="info-field">
+                <span class="info-label">Hour Meter Reading:</span>
+                <input type="text" class="info-input" />
+            </div>
+            <div class="info-field">
+                <span class="info-label">Operator Name:</span>
+                <input type="text" class="info-input" />
+            </div>
+        </div>
+    </div>
+
+    <!-- STATUS SUMMARY -->
+    <div class="status-summary">
+        <label class="status-item">
+            <span class="radio-wrap-large">
+                <input type="radio" name="overall-status" value="Pass" class="radio-hidden" />
+                <span class="radio-box-large"></span>
+            </span>
+            <span class="checkbox-label">PASS - Approved for Use</span>
+        </label>
+        <label class="status-item">
+            <span class="radio-wrap-large">
+                <input type="radio" name="overall-status" value="Fail" class="radio-hidden" />
+                <span class="radio-box-large"></span>
+            </span>
+            <span class="checkbox-label">FAIL - DO NOT OPERATE</span>
+        </label>
+        <div class="status-item">
+            <span class="checkbox-label" style="font-weight: normal;">Next Service Due: ______</span>
+        </div>
+    </div>
+
+    <!-- SECTION 1: GENERAL CONDITION & SAFETY DEVICES -->
+    <h2>1. General Condition & Safety Devices</h2>
+    <div class="checklist-section">
+        <div class="checklist-item">
+            <div class="item-text">Backup alarm/warning devices functional</div>
+            <div class="checkbox-container">
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-1" value="OK" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">OK</span></label>
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-1" value="Issue" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">Issue</span></label>
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-1" value="N/A" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">N/A</span></label>
+            </div>
+        </div>
+        <div class="checklist-item">
+            <div class="item-text">Lights (headlights, taillights, warning lights) operational</div>
+            <div class="checkbox-container">
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-2" value="OK" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">OK</span></label>
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-2" value="Issue" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">Issue</span></label>
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-2" value="N/A" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">N/A</span></label>
+            </div>
+        </div>
+        <div class="checklist-item">
+            <div class="item-text">Seat belt present and functional</div>
+            <div class="checkbox-container">
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-3" value="OK" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">OK</span></label>
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-3" value="Issue" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">Issue</span></label>
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-3" value="N/A" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">N/A</span></label>
+            </div>
+        </div>
+        <div class="checklist-item">
+            <div class="item-text">Fire extinguisher mounted and charged (if required)</div>
+            <div class="checkbox-container">
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-4" value="OK" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">OK</span></label>
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-4" value="Issue" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">Issue</span></label>
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-4" value="N/A" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">N/A</span></label>
+            </div>
+        </div>
+        <div class="checklist-item">
+            <div class="item-text">Rollover protection (ROPS/FOPS) intact, no damage</div>
+            <div class="checkbox-container">
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-5" value="OK" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">OK</span></label>
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-5" value="Issue" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">Issue</span></label>
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-5" value="N/A" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">N/A</span></label>
+            </div>
+        </div>
+        <div class="checklist-item">
+            <div class="item-text">Horn/audible warning device works properly</div>
+            <div class="checkbox-container">
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-6" value="OK" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">OK</span></label>
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-6" value="Issue" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">Issue</span></label>
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-6" value="N/A" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">N/A</span></label>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECTION 2: ENGINE & FLUIDS -->
+    <h2>2. Engine & Fluids</h2>
+    <div class="checklist-section">
+        <div class="checklist-item">
+            <div class="item-text">Engine oil level adequate, no leaks</div>
+            <div class="checkbox-container">
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-7" value="OK" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">OK</span></label>
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-7" value="Issue" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">Issue</span></label>
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-7" value="N/A" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">N/A</span></label>
+            </div>
+        </div>
+        <div class="checklist-item">
+            <div class="item-text">Hydraulic fluid level adequate, no leaks</div>
+            <div class="checkbox-container">
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-8" value="OK" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">OK</span></label>
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-8" value="Issue" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">Issue</span></label>
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-8" value="N/A" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">N/A</span></label>
+            </div>
+        </div>
+        <div class="checklist-item">
+            <div class="item-text">Coolant level adequate</div>
+            <div class="checkbox-container">
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-9" value="OK" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">OK</span></label>
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-9" value="Issue" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">Issue</span></label>
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-9" value="N/A" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">N/A</span></label>
+            </div>
+        </div>
+        <div class="checklist-item">
+            <div class="item-text">Fuel level adequate for planned operation</div>
+            <div class="checkbox-container">
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-10" value="OK" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">OK</span></label>
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-10" value="Issue" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">Issue</span></label>
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-10" value="N/A" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">N/A</span></label>
+            </div>
+        </div>
+        <div class="checklist-item">
+            <div class="item-text">No visible fuel, oil, or hydraulic leaks under equipment</div>
+            <div class="checkbox-container">
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-11" value="OK" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">OK</span></label>
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-11" value="Issue" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">Issue</span></label>
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-11" value="N/A" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">N/A</span></label>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECTION 3: TIRES/TRACKS & BRAKES -->
+    <h2>3. Tires/Tracks & Brakes</h2>
+    <div class="checklist-section">
+        <div class="checklist-item">
+            <div class="item-text">Tires properly inflated, no cuts or excessive wear</div>
+            <div class="checkbox-container">
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-12" value="OK" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">OK</span></label>
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-12" value="Issue" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">Issue</span></label>
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-12" value="N/A" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">N/A</span></label>
+            </div>
+        </div>
+        <div class="checklist-item">
+            <div class="item-text">Tracks tight and in good condition (if applicable)</div>
+            <div class="checkbox-container">
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-13" value="OK" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">OK</span></label>
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-13" value="Issue" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">Issue</span></label>
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-13" value="N/A" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">N/A</span></label>
+            </div>
+        </div>
+        <div class="checklist-item">
+            <div class="item-text">Service brakes operate properly</div>
+            <div class="checkbox-container">
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-14" value="OK" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">OK</span></label>
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-14" value="Issue" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">Issue</span></label>
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-14" value="N/A" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">N/A</span></label>
+            </div>
+        </div>
+        <div class="checklist-item">
+            <div class="item-text">Parking brake holds equipment securely</div>
+            <div class="checkbox-container">
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-15" value="OK" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">OK</span></label>
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-15" value="Issue" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">Issue</span></label>
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-15" value="N/A" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">N/A</span></label>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECTION 4: CONTROLS & HYDRAULICS -->
+    <h2>4. Controls & Hydraulics</h2>
+    <div class="checklist-section">
+        <div class="checklist-item">
+            <div class="item-text">All controls operate smoothly (steering, throttle, boom, bucket)</div>
+            <div class="checkbox-container">
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-16" value="OK" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">OK</span></label>
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-16" value="Issue" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">Issue</span></label>
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-16" value="N/A" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">N/A</span></label>
+            </div>
+        </div>
+        <div class="checklist-item">
+            <div class="item-text">Hydraulic hoses intact, no bulges, cracks, or leaks</div>
+            <div class="checkbox-container">
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-17" value="OK" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">OK</span></label>
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-17" value="Issue" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">Issue</span></label>
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-17" value="N/A" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">N/A</span></label>
+            </div>
+        </div>
+        <div class="checklist-item">
+            <div class="item-text">Boom, bucket, forks operate smoothly (no binding or jerking)</div>
+            <div class="checkbox-container">
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-18" value="OK" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">OK</span></label>
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-18" value="Issue" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">Issue</span></label>
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-18" value="N/A" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">N/A</span></label>
+            </div>
+        </div>
+        <div class="checklist-item">
+            <div class="item-text">All safety lock-out controls function properly</div>
+            <div class="checkbox-container">
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-19" value="OK" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">OK</span></label>
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-19" value="Issue" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">Issue</span></label>
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-19" value="N/A" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">N/A</span></label>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECTION 5: OPERATOR STATION & VISIBILITY -->
+    <h2>5. Operator Station & Visibility</h2>
+    <div class="checklist-section">
+        <div class="checklist-item">
+            <div class="item-text">Windows/mirrors clean, no cracks obstructing visibility</div>
+            <div class="checkbox-container">
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-20" value="OK" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">OK</span></label>
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-20" value="Issue" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">Issue</span></label>
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-20" value="N/A" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">N/A</span></label>
+            </div>
+        </div>
+        <div class="checklist-item">
+            <div class="item-text">Gauges/instruments readable and functioning</div>
+            <div class="checkbox-container">
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-21" value="OK" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">OK</span></label>
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-21" value="Issue" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">Issue</span></label>
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-21" value="N/A" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">N/A</span></label>
+            </div>
+        </div>
+        <div class="checklist-item">
+            <div class="item-text">Operator manual/load chart accessible in cab (if required)</div>
+            <div class="checkbox-container">
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-22" value="OK" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">OK</span></label>
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-22" value="Issue" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">Issue</span></label>
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-22" value="N/A" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">N/A</span></label>
+            </div>
+        </div>
+        <div class="checklist-item">
+            <div class="item-text">Cab/operator station clean and free of debris</div>
+            <div class="checkbox-container">
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-23" value="OK" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">OK</span></label>
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-23" value="Issue" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">Issue</span></label>
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-23" value="N/A" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">N/A</span></label>
+            </div>
+        </div>
+    </div>
+
+    <!-- ALERT BOX -->
+    <div class="alert-box">
+        <div class="alert-text">⚠ DO NOT OPERATE equipment if any safety-critical deficiency is found. Tag out and notify maintenance/supervisor immediately.</div>
+    </div>
+
+    <!-- OBSERVATIONS & NOTES -->
+    <div class="notes-section">
+        <h3>Deficiencies Found & Maintenance Required</h3>
+        <textarea class="notes-area" placeholder="Document any deficiencies, repairs needed, or maintenance performed..."></textarea>
+    </div>
+
+    <!-- SIGNATURE SECTION -->
+    <div class="signature-section">
+        <div class="signature-box">
+            <span class="signature-label">Operator Signature:</span>
+            <div class="signature-line"></div>
+            <div class="info-field" style="margin-top: 12pt;">
+                <span class="info-label">Print Name:</span>
+                <input type="text" class="info-input" />
+            </div>
+            <div class="info-field">
+                <span class="info-label">Date & Time:</span>
+                <div class="date-time-row">
+                    <input type="date" class="info-input" />
+                    <input type="time" class="info-input" />
+                </div>
+            </div>
+        </div>
+        <div class="signature-box">
+            <span class="signature-label">Supervisor/Mechanic Review:</span>
+            <div class="signature-line"></div>
+            <div class="info-field" style="margin-top: 12pt;">
+                <span class="info-label">Print Name:</span>
+                <input type="text" class="info-input" />
+            </div>
+            <div class="info-field">
+                <span class="info-label">Date:</span>
+                <input type="date" class="info-input" />
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+        <div class="footer-grid">
+            <div>Page 1 of 1</div>
+            <div>Equipment Pre-Use Inspection Log</div>
+            <div>Version 1.0 - 2026</div>
+        </div>
+        <div style="margin-top: 8pt; font-size: 7pt;">
+            Equipment operators must conduct pre-use inspections per manufacturer recommendations and OSHA requirements. Defective equipment must be tagged out and removed from service. This form is a documentation tool - consult equipment manual and applicable safety standards.
+        </div>
+    </div>
+
+</form>
+
+<script src="script.js"></script>
+</body>
+</html>
