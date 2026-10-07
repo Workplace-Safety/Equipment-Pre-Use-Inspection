@@ -396,3 +396,10 @@ textarea.signature-input {
     padding: 8pt 0 4pt 0;
     font-size: 12pt;
 }
+
+/* Keep these blocks whole when the PDF is split into pages */
+.header, .status-summary, .checklist-item, .info-box, .alert-box,
+.atmospheric-grid, .notes-section, .signature-section, .signature-box {
+    break-inside: avoid;
+    page-break-inside: avoid;
+}
