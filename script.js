@@ -49,47 +49,41 @@
         }, 0);
     });
 
-    // ---------- PDF: draw text fields as plain wrapped text ----------
+    // ---------- PDF: wrapped text instead of <textarea> ----------
     // html2canvas draws <textarea> content on ONE line and can overflow the page.
-    // So, only inside the PDF capture, each textarea is swapped for a normal
-    // <div> that wraps its text. Styles/values are read from the live form first.
-    function snapshotTextFields(root) {
-        var snap = {};
+    // So the PDF is built from a copy of the form where every textarea is already
+    // a normal <div> that wraps its text. This is done BEFORE html2pdf measures the
+    // page breaks, so the breaks are calculated on the exact layout that gets
+    // captured (otherwise content can be cut in half at the page edge).
+    function buildPdfSource(root) {
+        var clone = root.cloneNode(true);
+        var live = root.querySelectorAll('textarea');
+        var copies = clone.querySelectorAll('textarea');
         var keys = ['fontFamily', 'fontSize', 'fontWeight', 'lineHeight', 'color',
                     'paddingTop', 'paddingRight', 'paddingBottom', 'paddingLeft',
                     'borderTop', 'borderRight', 'borderBottom', 'borderLeft'];
-        Array.prototype.forEach.call(root.querySelectorAll('textarea'), function (t, i) {
+        Array.prototype.forEach.call(copies, function (c, i) {
+            var t = live[i];
             var cs = window.getComputedStyle(t);
-            var css = {};
-            keys.forEach(function (k) { css[k] = cs[k]; });
-            t.setAttribute('data-pdf-i', i);
-            snap[i] = { value: t.value, height: t.offsetHeight, css: css };
-        });
-        return snap;
-    }
-
-    function swapTextFieldsForPdf(doc, snap) {
-        Array.prototype.forEach.call(doc.querySelectorAll('textarea[data-pdf-i]'), function (t) {
-            var s = snap[t.getAttribute('data-pdf-i')];
-            if (!s) return;
-            var d = doc.createElement('div');
-            d.textContent = s.value;
+            var d = document.createElement('div');
+            d.textContent = t.value;
             var st = d.style;
-            Object.keys(s.css).forEach(function (k) { st[k] = s.css[k]; });
+            keys.forEach(function (k) { st[k] = cs[k]; });
             st.display = 'block';
             st.boxSizing = 'border-box';
             st.width = '100%';
             st.maxWidth = '100%';
             st.height = 'auto';
-            st.minHeight = s.height + 'px';
+            st.minHeight = t.offsetHeight + 'px';
             st.margin = '0';
             st.background = 'transparent';
             st.whiteSpace = 'pre-wrap';
             st.overflowWrap = 'anywhere';
             st.wordBreak = 'break-word';
             st.overflow = 'visible';
-            t.parentNode.replaceChild(d, t);
+            c.parentNode.replaceChild(d, c);
         });
+        return clone;
     }
 
     // ---------- Read a native date/time input into a friendly display string ----------
@@ -134,7 +128,7 @@
         btn.textContent = 'Preparing PDF…';
 
         var el = document.getElementById('printable');
-        var textSnap = snapshotTextFields(el);
+        var pdfSource = buildPdfSource(el);
 
         var opt = {
             margin: 0.4,
@@ -149,15 +143,13 @@
                 // shifted/cropped on the left on some desktop browsers even
                 // though it looks fine on mobile.
                 scrollX: -window.scrollX,
-                scrollY: -window.scrollY,
-                // draw text fields as wrapped text (see swapTextFieldsForPdf)
-                onclone: function (doc) { swapTextFieldsForPdf(doc, textSnap); }
+                scrollY: -window.scrollY
             },
             jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' },
             pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
         };
 
-        html2pdf().set(opt).from(el).save().then(function () {
+        html2pdf().set(opt).from(pdfSource).save().then(function () {
             btn.disabled = false;
             btn.textContent = '⬇ Download PDF';
         }).catch(function (err) {
